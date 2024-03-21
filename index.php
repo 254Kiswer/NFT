@@ -1,5 +1,5 @@
-<?php require "./includes/header.php";?>
-<?php require "./config/config.php";?>
+<?php require "includes/header.php";?>
+<?php require "config/config.php";?>
 
 <body>
   <header class="bg-dark text-light py-5">
@@ -57,4 +57,4 @@
     </div>
 
 </body>
-<?php require "./includes/footer.php";?>
+<?php require "includes/footer.php";?>

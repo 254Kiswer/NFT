@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">NFT-LMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.php">About</a>
+                </li>
+                <?php if(isset($_SESSION['username'])): ?>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                </li>
+                <?php endif; ?>
+            </ul>
+            <?php if(isset($_SESSION['username'])): ?>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                        Courses
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="courses/on-boarding.php">On Boarding</a></li>
+                        <li><a class="dropdown-item" href="courses/transport.php">Transport</a></li>
+                        <li><a class="dropdown-item" href="courses/safety.php">Safety</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                        Menu
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                        <li><a class="dropdown-item" href="auth/logout.php">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <?php else: ?>
+            <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                        Menu
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="auth/login.php">Login</a></li>
+                        <li><a class="dropdown-item" href="auth/register.php">Register</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+</nav>

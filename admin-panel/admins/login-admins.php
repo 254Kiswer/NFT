@@ -1,67 +1,58 @@
 <?php require "../panel-includes/header.php"; ?>
+<?php require "../../config/config.php"; ?>
+<?php 
 
-<body>
-<div id="wrapper">
-    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
-      <div class="container">
-      <a class="navbar-brand" href="../index.html">LOGO</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    if(isset($_SESSION['adminname'])){
 
-      <div class="collapse navbar-collapse" id="navbarText">
-        <!-- <ul class="navbar-nav side-nav" >
-          <li class="nav-item">
-            <a class="nav-link" style="margin-left: 20px;" href="../index.html">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admins.html" style="margin-left: 20px;">Admins</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../categories-admins/show-categories.html" style="margin-left: 20px;">Categories</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../posts-admins/show-posts.html" style="margin-left: 20px;">Posts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="margin-left: 20px;">Comments</a>
-          </li> 
+      echo "<script> window.location.href='".ADMINURL."';</script>";
 
-        </ul> -->
-        <ul class="navbar-nav ml-md-auto d-md-flex">
-        <!--   <li class="nav-item">
-            <a class="nav-link" href="../index.html">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              username
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Logout</a>
-              
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" href="login-admins.html">Login
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>           
-          
-        </ul>
-      </div>
-    </div>
-    </nav>
-<div class="container-fluid"> 
+    }
+
+    if(isset($_POST['submit'])){
+
+      if(empty($_POST['email']) OR empty($_POST['password'])){
+
+        echo "<script>alert('one or more inputs are empty');</script>";
+
+      } else {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+
+        //query
+        $login = $conn->query("SELECT * FROM admins WHERE email = '$email'" );
+        $login->execute();
+
+        $fetch = $login->fetch(PDO::FETCH_ASSOC);
+
+        //Validate email
+        if($login -> rowCount() > 0){
+
+          //validate password
+          if(password_verify($password, $fetch['password'])) {
+
+            $_SESSION['email'] = $fetch['email'];
+            $_SESSION['adminname'] = $fetch['adminname'];
+            $_SESSION['admin_id'] = $fetch['id'];
+            
+            echo "<script>window.location.href='".ADMINURL."'; </script>";
+          } else {
+            echo "<script>alert('email or password wrong');</script>";
+          }
+        } else {
+          echo "<script>alert('email or password wrong');</script>";
+        }
+      }
+    }
+?>
+
+
       <div class="row">
         <div class="col">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mt-5">Login</h5>
-              <form method="POST" class="p-auto" action="login.php">
+              <form method="POST" class="p-auto" action="login-admins.php">
                   <!-- Email input -->
                   <div class="form-outline mb-4">
                     <input type="email" name="email" id="form2Example1" class="form-control" placeholder="Email" />

@@ -4,7 +4,7 @@
      
      <?php
      
-     $courses = $conn->query("SELECT * FROM courses WHERE category_id='$id'");
+     $courses = $conn->query("SELECT * FROM courses ");
 
      $courses->execute();
 

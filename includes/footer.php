@@ -84,7 +84,8 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous">
 </script>
-<script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/script.js"></script>
+    <script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/jquery.js"></script>
     <script type="text/javascript" src="<?php echo APPURL; ?>/assets/js/jquery-migrate.js"></script>
     <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/bootstrap/libraries/popper.js"></script>
     <script type="text/javascript" src="<?php echo APPURL; ?>/assets/packages/bootstrap/bootstrap.js"></script>

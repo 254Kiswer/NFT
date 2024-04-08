@@ -1,93 +1,44 @@
 <?php require "../panel-includes/header.php"; ?>
+<?php require "../../config/config.php";?>
+<?php 
+  if(!isset($_SESSION['adminname'])) {
 
-<body>
-  <div id="wrapper">
-    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">LOGO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+     echo "<script> window.location.href='".ADMINURL."/admins/login-admins.php';</script>";
+  }
 
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav side-nav">
-            <li class="nav-item">
-              <a class="nav-link" style="margin-left: 20px;" href="../index.html">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../admins/admins.html" style="margin-left: 20px;">Admins</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../categories-admins/show-categories.html"
-                style="margin-left: 20px;">Categories</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../products-admins/show-products.html" style="margin-left: 20px;">Products</a>
-            </li>
-            <!--  <li class="nav-item">
-            <a class="nav-link" href="#" style="margin-left: 20px;">Comments</a>
-          </li> -->
-          </ul>
-          <ul class="navbar-nav ml-md-auto d-md-flex">
-            <li class="nav-item">
-              <a class="nav-link" href="../index.html">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                username
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Logout</a>
+  $course_category = $conn->query("SELECT * FROM course_category");
+  $course_category->execute();
 
-            </li>
+  $allCourse_category = $course_category->fetchAll(PDO::FETCH_OBJ);
 
 
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container-fluid">
+
+?>
 
       <div class="row">
         <div class="col">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-4 d-inline">Categories</h5>
-              <a href="create-category.html" class="btn btn-primary mb-4 text-center float-right">Create Categories</a>
+              <a href="<?php echo ADMINURL; ?>/categories-admins/create-category.php" class="btn btn-primary mb-4 text-center float-right">Create Categories</a>
               <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Course name</th>
+                    <th scope="col">category name</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach($allCourse_category as $category) : ?>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Transport</td>
-                    <td><a href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                    <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
+                    <th scope="row"><?php echo $category->id;?></th>
+                    <td><?php echo $category->title;?></td>
+                    <td><a href="<?php echo ADMINURL; ?>/update-category.php?=<?php echo $category->id;?>" class="btn btn-warning text-white text-center ">Update </a></td>
+                    <td><a href="<?php echo ADMINURL; ?>/delete-category.php?=<?php echo $category->id;?>" class="btn btn-danger  text-center ">Delete </a></td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>On-boarding</td>
-                    <td><a href="#" class="btn btn-warning text-white text-center">Update </a></td>
-                    <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Safety</td>
-                    <td><a href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                    <td><a href="#" class="btn btn-danger text-center">Delete </a></td>
-                  </tr>
+                  <?php endforeach;?>
                 </tbody>
               </table>
             </div>

@@ -1,10 +1,10 @@
 <?php
 
-if(!isset($_SERVER{'HTTP_REFERER'})){
-    //redirect them to your desired location
-    header('location:http://localhost/NFT/about.php');
-    exit;
-} 
+// if(!isset($_SERVER{'HTTP_REFERER'})){
+//     //redirect them to your desired location
+//     header('location:http://localhost/NFT/index.php');
+//     exit;
+// } 
 
 try{
 

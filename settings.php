@@ -1,4 +1,49 @@
 <?php require "./includes/header.php"; ?>
+<?php require "./config/config.php";?>
+<?php
+if(isset($_SESSION['username'])) {
+
+echo "<script> window.location.href'".APPURL."';</script>";
+}
+
+if(isset($_POST['submit'])) {
+
+ if(empty($_POST['employee_no']) OR empty($_POST['fullname']) OR empty($_POST['username'])
+  OR empty($_POST['email']) OR empty($_POST['password'])){
+
+echo "<script>alert('one or more inputs are empty');</script>";
+
+}else{
+
+if($_POST['password'] == $_POST['confirm_password']){
+
+    $employee_no = $_POST['employee_no'];
+    $fullname = $_POST['fullname'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $image = "user.png";
+
+
+    $insert = $conn->prepare("INSERT INTO users(employee_no, fullname, username, email, mypassword, image) 
+    VALUES(:employee_no, :fullname, :username, :email, :mypassword, :image)");
+
+    $insert->execute([
+        ":employee_no" => $employee_no,
+        ":fullname" => $fullname,
+        ":username" => $username,
+        ":email" => $email,
+        ":mypassword" => password_hash($password, PASSWORD_DEFAULT),
+        ":image" => $image
+    ]);
+    echo "<script> window.location.href='".APPURL."/auth/login.php';</script>";
+}else {
+    echo "<script>alert('password does not match, write correct password');</script>";
+}
+}
+
+}
+?>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -15,7 +60,7 @@
                     <div class="row mt-5 align-items-center">
                         <div class="col-md-3 text-center mb-5">
                             <div class="avatar avatar-xl">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..."
+                                <img src="<?php echo APPURL; ?>/assets/img/NFT-background.jpg" alt="..."
                                     class="avatar-img rounded-circle" />
                             </div>
                         </div>
@@ -46,11 +91,11 @@
                     <hr class="my-4" />
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="firstname">Firstname</label>
-                            <input type="text" id="firstname" class="form-control" placeholder="Brown" />
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" class="form-control" placeholder="Brown" />
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="lastname">Lastname</label>
+                            <label for="employee_no">Employee No.</label>
                             <input type="text" id="lastname" class="form-control" placeholder="Asher" />
                         </div>
                     </div>
@@ -59,11 +104,11 @@
                         <input type="email" class="form-control" id="inputEmail4" placeholder="brown@asher.me" />
                     </div>
                     <div class="form-group">
-                        <label for="inputAddress5">Address</label>
-                        <input type="text" class="form-control" id="inputAddress5"
-                            placeholder="P.O. Box 464, 5975 Eget Avenue" />
+                        <label for="inputAddress5">Username</label>
+                        <input type="text" class="form-control" id="username"
+                            placeholder="Username" />
                     </div>
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputCompany5">Company</label>
                             <input type="text" class="form-control" id="inputCompany5"
@@ -80,7 +125,7 @@
                             <label for="inputZip5">Zip</label>
                             <input type="text" class="form-control" id="inputZip5" placeholder="98232" />
                         </div>
-                    </div>
+                    </div> -->
                     <hr class="my-4" />
                     <div class="row mb-4">
                         <div class="col-md-6">

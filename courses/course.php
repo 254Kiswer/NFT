@@ -50,7 +50,7 @@
         <div class="quiz">
           <h2>Short Quiz</h2>
           <p>Test your knowledge with a quick quiz!</p>
-          <button class="btn btn-success">Start Quiz</button>
+          <a href="<?php echo APPURL; ?>/courses/quiz.php?id=<?php echo $courses->id; ?>" class="btn btn-success text-white text-center ">Start Quiz</a>
         </div>
       </div>
     </div>

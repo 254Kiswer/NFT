@@ -1,66 +1,32 @@
-<?php require "../panel-includes/header.php"; ?>
+<?php require "./panel-includes/header.php"; ?>
+<?php require "../config/config.php";?>
+<?php
+  if(!isset($_SESSION['adminname'])){
 
-<body>
-  <div id="wrapper">
-    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">LOGO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    echo "<script> window.location.href='".ADMINURL."/admins/login-admins.php'; </script>";
+    }
 
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav side-nav">
-            <li class="nav-item">
-              <a class="nav-link text-white" style="margin-left: 20px;" href="index.html">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="admins/admins.html" style="margin-left: 20px;">Admins</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories-admins/show-categories.html" style="margin-left: 20px;"> Course
-                Categories</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products-admins/sshow-courses.html" style="margin-left: 20px;">Courses</a>
-            </li>
+    //courses
+  $courses = $conn->query("SELECT COUNT(*) as courses_num FROM courses");
+  $courses->execute();
 
-            <li class="nav-item">
-              <a class="nav-link" href="orders-admins/show-Registered.html" style="margin-left: 20px;">registered
-                Employees</a>
-            </li>
+  $num_courses = $courses->fetch(PDO::FETCH_OBJ);
 
-          </ul>
-          <ul class="navbar-nav ml-md-auto d-md-flex">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="admins/login-admins.html">login
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                username
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Logout</a>
+  //Employees registered
+  $users = $conn->query("SELECT COUNT(*) as users_num FROM courses");
+  $users->execute();
 
-            </li>
+  $num_users = $users->fetch(PDO::FETCH_OBJ);
+
+  //admin registered
+  $admins = $conn->query("SELECT COUNT(*) as admins_num FROM courses");
+  $admins->execute();
+
+  $num_admins = $admins->fetch(PDO::FETCH_OBJ);
 
 
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container-fluid">
+
+?>
 
       <div class="row">
         <div class="col-md-3">
@@ -68,7 +34,7 @@
             <div class="card-body">
               <h5 class="card-title">Courses</h5>
               <!-- <h6 class="card-subtitle mb-2 text-muted">Bootstrap 4.0.0 Snippet by pradeep330</h6> -->
-              <p class="card-text">number of courses: 8</p>
+              <p class="card-text">number of courses: <?php echo $num_courses->courses_num;?></p>
 
             </div>
           </div>
@@ -78,7 +44,7 @@
             <div class="card-body">
               <h5 class="card-title">Employee registered</h5>
               <!-- <h6 class="card-subtitle mb-2 text-muted">Bootstrap 4.0.0 Snippet by pradeep330</h6> -->
-              <p class="card-text">registered employees: 8</p>
+              <p class="card-text">registered employees: <?php echo $num_users->users_num;?></p>
 
             </div>
           </div>
@@ -89,7 +55,7 @@
             <div class="card-body">
               <h5 class="card-title">Admins</h5>
 
-              <p class="card-text">number of admins: 3</p>
+              <p class="card-text">number of admins: <?php echo $num_admins->admins_num;?></p>
 
             </div>
           </div>

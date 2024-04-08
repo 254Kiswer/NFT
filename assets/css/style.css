@@ -48,8 +48,6 @@ body{
     overflow: hidden;
 }
 
-
-
 .container .card {
     position: relative;
     display: flex;
@@ -237,4 +235,16 @@ body{
   height: 150px;
   border-radius: 50%;
   margin-bottom: 10px;
+}
+
+.results h3{
+  background: white;
+  padding:10px;
+  margin: 10px 0;
+  
+}
+
+.results span{
+  color:black;
+  font-weight: bold;
 }

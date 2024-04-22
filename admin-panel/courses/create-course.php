@@ -61,7 +61,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-5 d-inline">Create Courses</h5>
-              <form method="POST" action=",create-course.php" enctype="multipart/form-data">
+              <form method="POST" action="create-course.php" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
                   <label> Course Title</label>

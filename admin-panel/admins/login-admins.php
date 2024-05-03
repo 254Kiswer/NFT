@@ -1,49 +1,9 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php"; ?>
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 <?php 
 
-    if(isset($_SESSION['adminname'])){
-
-      echo "<script> window.location.href='".ADMINURL."';</script>";
-
-    }
-
-    if(isset($_POST['submit'])){
-
-      if(empty($_POST['email']) OR empty($_POST['password'])){
-
-        echo "<script>alert('one or more inputs are empty');</script>";
-
-      } else {
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-
-
-        //query
-        $login = $conn->query("SELECT * FROM admins WHERE email = '$email'" );
-        $login->execute();
-
-        $fetch = $login->fetch(PDO::FETCH_ASSOC);
-
-        //Validate email
-        if($login -> rowCount() > 0){
-
-          //validate password
-          if(password_verify($password, $fetch['password'])) {
-
-            $_SESSION['email'] = $fetch['email'];
-            $_SESSION['adminname'] = $fetch['adminname'];
-            $_SESSION['admin_id'] = $fetch['id'];
-            
-            echo "<script>window.location.href='".ADMINURL."'; </script>";
-          } else {
-            echo "<script>alert('email or password wrong');</script>";
-          }
-        } else {
-          echo "<script>alert('email or password wrong');</script>";
-        }
-      }
-    }
+   
 ?>
 
 
@@ -55,14 +15,14 @@
               <form method="POST" class="p-auto" action="login-admins.php">
                   <!-- Email input -->
                   <div class="form-outline mb-4">
-                    <input type="email" name="email" id="form2Example1" class="form-control" placeholder="Email" />
+                    <input type="email" name="email" id="form2Example1" class="form-control" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
                    
                   </div>
 
                   
                   <!-- Password input -->
                   <div class="form-outline mb-4">
-                    <input type="password" name="password" id="form2Example2" placeholder="Password" class="form-control" />
+                    <input type="password" name="password" id="form2Example2" placeholder="Password" class="form-control" pattern="(?=.*[!@#$%^&*])(?=.*[a-zA-Z0-9]).{8,}" title="Password must contain at least 8 characters and at least one special character"/>
                     
                   </div>
 

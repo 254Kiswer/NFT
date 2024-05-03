@@ -1,31 +1,8 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php";?>
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 <?php 
-if(!isset($_SESSION['adminname'])){
 
-  echo "<script> window.location.href='".ADMINURL."/admins/login-admins.php';</script>";
-}
-
-if(isset($_POST['submit'])){
-  if(empty($_POST['email']) OR empty($_POST['password']) OR empty($_POST['adminname'])){
-
-    echo "<script>alert('one or more inputs are empty');</script>";
-
-  }else {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $adminname = $_POST['adminname'];
-
-    $insert = $conn->prepare("INSERT INTO admins (email, mypassword, adminname) VALUES(:email, :mypassword, :adminname)");
-
-    $insert->execute([
-      ":email" => $email,
-      ":mypassword" => password_hash($password, PASSWORD_DEFAULT),
-      ":adminname" => $adminname,
-    ]);
-    echo "<script>window.location.href='".ADMINURL."/admins/admins.php';</script>";
-  }
-}
 
 ?>
 
@@ -37,7 +14,7 @@ if(isset($_POST['submit'])){
           <form method="POST" action="create-admins.php" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
-                  <input type="email" name="email" id="form2Example1" class="form-control" placeholder="email" />
+                  <input type="email" name="email" id="form2Example1" class="form-control" placeholder="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"/>
                  
                 </div>
 
@@ -45,7 +22,7 @@ if(isset($_POST['submit'])){
                   <input type="text" name="username" id="form2Example1" class="form-control" placeholder="username" />
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="password" name="password" id="form2Example1" class="form-control" placeholder="password" />
+                  <input type="password" name="password" id="form2Example1" class="form-control" placeholder="password" pattern="(?=.*[!@#$%^&*])(?=.*[a-zA-Z0-9]).{8,}" title="Password must contain at least 8 characters and at least one special character"/>
                 </div>
 
                

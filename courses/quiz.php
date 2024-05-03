@@ -1,73 +1,8 @@
 <?php require "../includes/header.php";?>
 <?php require "../config/config.php";?>  
+<?php require "../assets/logics/logic.php"; ?>
 
-<?php 
 
-  if(!isset($_SESSION['username'])){
-
-    echo "<script> window.location.href'".APPURL."';</script>";
-
-  }
-
-  if(isset($_POST['submit'])) {
-    
-      $user_id = $_POST['user_id'];
-    //   $course_id = $_POST['course_id'];
-    //   $category_id = $_POST['category_id'];
-    //   $employee_no = $_POST['employee_no'];
-      $totalScore = $_POST['totalScore'];
-      
-
-      $insert = $conn->prepare("INSERT INTO results (user_id, totalScore)
-      VALUES(:user_id, :totalScore)");
-      
-      $insert->execute([
-        ":user_id" => $user_id,
-        // ":course_id" => $course_id,
-        // ":category_id" => $category_id,
-        // ":employee_no" => $employee_no,
-        ":totalScore" => $totalScore
-      ]);
-    }
-
-    if(isset($_GET['id'])){
-    
-        $id = $_GET['id'];
-
-        $select = $conn->query("SELECT * FROM users WHERE id='$id'");
-        $select->execute();
-    
-        $user = $select->fetch(PDO::FETCH_OBJ);
-    
-    } 
-    // else {
-    //     echo "<script> window.location.href='".APPURL."/404.php'; </script>";
-    
-    // }
-
-    // $courses = $conn->prepare("SELECT * FROM courses WHERE id != '$id'");
-
-    // $courses->execute();
-
-    // $allCourses = $courses->fetchAll(PDO::FETCH_OBJ);
-
-    //course validation
-    // if(isset($_SESSION['user_id'])){
-        
-    //     $courses = $conn->query("SELECT * FROM courses WHERE id = '$id'");
-
-    //     $courses->execute();
-    
-    //     $allCourses= $courses->fetchAll(PDO::FETCH_OBJ);
-    
-    // }
-
-    // $category = $conn->query("SELECT * FROM course_category WHERE (id as category_id ='$id')");
-    // $category->execute();
-
-    // $course_category = $category->fetch(PDO::FETCH_OBJ);
-    
-?> 
 
 <body>
 <div  class= "container" >

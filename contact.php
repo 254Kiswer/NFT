@@ -1,4 +1,5 @@
 <?php require "./includes/header.php"; ?>
+<?php require "./config/config.php"; ?>
 
 <body>
 <!--Section: Contact v.2-->

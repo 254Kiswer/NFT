@@ -1,60 +1,7 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php";?>
-<?php
-  if(!isset($_SESSION['adminname'])){
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 
-    echo "<script>window.location.href='".ADMINURL."/admins/login-admins.php';</script>";
-  }
-
-  //fetching categories
-  $categories = $conn->query("SELECT * FROM course_category");
-  $categories->execute();
-
-  $allCategories = $categories->fetchAll(PDO::FETCH_OBJ);
-
-  if(isset($_POST['submit'])){
-
-    if(empty($_POST['category_id']) OR empty($_POST['title']) OR empty($_POST['instructor']) OR empty($_POST['description']) OR empty($_POST['units'])
-     OR empty($_POST['due_date']) OR empty($_POST['status'])){
-
-       echo "<script>alert('one or more inputs are empty');</script>";
-
-    }else {
-
-      $category_id = $_POST['category_id'];
-      $title = $_POST['title'];
-      $instructor = $_POST['instructor'];
-      $description = $_POST['description'];
-      $units = $_POST['units'];
-      $due_date = $_POST['due_date'];
-      $status = $_POST['status'];
-      $file_type = $_FILES['file']['name'];
-
-      //where the course file is stored
-      $course_file_path = "../courses/course_file/".basename($_FILES['file']['name']);
-
-       $insert = $conn->prepare("INSERT INTO courses (category_id, title, instructor, description, units, due_date, status, file_type)
-       VALUES(:category_id, :title, :instructor, :description, :units, :due_date, :status, :file_type)");
-
-        $insert->execute([
-          ":category_id" => $category_id,
-          ":title" => $title,
-          ":instructor" => $instructor,
-          ":description" => $description,
-          ":units" => $units,
-          ":due_date" => $due_date,
-          ":status" => $status,
-          ":file_type" => $file_type
-        ]);
-        if(move_uploaded_file($_FILES['file']['tmp_name'], $dire)){
-
-          echo "<script>window.location.href='".ADMINURL."/courses/course.php';</script>";
-        }
-    }
-  }
-
-
-?>
 
       <div class="row">
         <div class="col">

@@ -1,32 +1,7 @@
 <?php require "./panel-includes/header.php"; ?>
 <?php require "../config/config.php";?>
-<?php
-  if(!isset($_SESSION['adminname'])){
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 
-    echo "<script> window.location.href='".ADMINURL."/admins/login-admins.php'; </script>";
-    }
-
-    //courses
-  $courses = $conn->query("SELECT COUNT(*) as courses_num FROM courses");
-  $courses->execute();
-
-  $num_courses = $courses->fetch(PDO::FETCH_OBJ);
-
-  //Employees registered
-  $users = $conn->query("SELECT COUNT(*) as users_num FROM courses");
-  $users->execute();
-
-  $num_users = $users->fetch(PDO::FETCH_OBJ);
-
-  //admin registered
-  $admins = $conn->query("SELECT COUNT(*) as admins_num FROM courses");
-  $admins->execute();
-
-  $num_admins = $admins->fetch(PDO::FETCH_OBJ);
-
-
-
-?>
 
       <div class="row">
         <div class="col-md-3">

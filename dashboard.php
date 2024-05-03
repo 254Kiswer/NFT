@@ -1,14 +1,8 @@
 <?php require "./includes/header.php"; ?>
 <?php require "./config/config.php"; ?>
+<?php require "./assets/sql/sql.php"; ?>
 <?php
 
-//Course offered
-
-$courses = $conn->query("SELECT * FROM courses");
-
-$courses->execute();
-
-$allCourses = $courses->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <body>

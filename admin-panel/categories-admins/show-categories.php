@@ -1,19 +1,6 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php";?>
-<?php 
-  if(!isset($_SESSION['adminname'])) {
-
-     echo "<script> window.location.href='".ADMINURL."/admins/login-admins.php';</script>";
-  }
-
-  $course_category = $conn->query("SELECT * FROM course_category");
-  $course_category->execute();
-
-  $allCourse_category = $course_category->fetchAll(PDO::FETCH_OBJ);
-
-
-
-?>
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 
       <div class="row">
         <div class="col">

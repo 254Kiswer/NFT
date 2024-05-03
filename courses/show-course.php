@@ -1,17 +1,7 @@
             
      <?php require "../includes/header.php"; ?>  
      <?php require "../config/config.php";?>  
-     
-     <?php
-     
-     $courses = $conn->query("SELECT * FROM courses ");
-
-     $courses->execute();
-
-     $allCourses = $courses->fetchAll(PDO::FETCH_OBJ);
-
-
-     ?>
+     <?php require "../assets/sql/sql.php"; ?>
             
     <body>
             <div class="card-body">

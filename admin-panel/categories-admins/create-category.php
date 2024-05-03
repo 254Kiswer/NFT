@@ -1,32 +1,7 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php";?>
-<?php 
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 
-  if(!isset($_SESSION['adminname'])){
-
-    echo "<script> window.location.href'".ADMINURL."/admins/login-admins.php';</script>";
-
-  }
-
-  if(isset($_POST['submit'])) {
-    if(empty($_POST['title']) OR empty($_POST['description'])){
-
-      echo "<script>alert('one or more inputs are empty');</script>";
-
-    } else {
-      $title = $_POST['title'];
-      $description = $_POST['description'];
-
-      $insert = $conn->prepare("INSERT INTO categories (title, description)
-      VALUES(:title, :description)");
-      
-      $insert->execute([
-        ":title" => $title,
-        ":description" => $description
-      ]);
-    }
-  }
-?>
 
 
       <div class="row">

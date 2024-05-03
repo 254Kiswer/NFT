@@ -1,42 +1,7 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php";?>
-<?php
-  if(!isset($_SESSION['adminname'])){
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 
-    echo "<script>window.location.href='".ADMINURL."/admins/login-admins.php';</script>";
-
-  }
-  if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    $select = $conn->query("SELECT * FROM course_category WHERE id='$id'");
-    $select->execute();
-
-    $category = $select->fetch(PDO::FETCH_OBJ);
-
-    if(isset($_POST['submit'])) {
-      if(empty($_POST['title']) OR empty($_POST['description'])){
-
-        echo "<script>alert('one or more inputs are empty');</script>";
-
-      }else{
-
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-
-        $insert = $conn->prepare("UPDATE course_category SET title = :title, description= :description WHERE id = '$id'");
-
-        $insert->execute([
-
-          ":title" => $title,
-          ":description" => $description,
-        ]);
-        echo "<script>window.location.href='".ADMINURL."/course-categories/show-categories.php';</script>";
-      }
-    }
-  }
-
-?>
 
 
 

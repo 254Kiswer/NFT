@@ -1,15 +1,8 @@
 <?php require "../panel-includes/header.php"; ?>
 <?php require "../../config/config.php"; ?>
+<?php require "../../assets/logics/logicAdmin.php"; ?>
 
-<?php 
-if(!isset($_SESSION['adminname'])){
-  echo "<script>window.location.href='".ADMINURL."/admins/login-admins.php';</script>";
-}
-    $admins = $conn->query("SELECT * FROM admins");
-    $admins->execute();
 
-    $allAdmins = $admins->fetchAll(PDO::FETCH_OBJ);
-?>
 
           <div class="row">
         <div class="col">
